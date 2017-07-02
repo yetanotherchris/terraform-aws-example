@@ -1,0 +1,39 @@
+# RDS (Aurora)
+# Docs: https://www.terraform.io/docs/providers/aws/r/rds_cluster.html
+
+#
+# Terraform appears to re-created the RDS cluster everytime you change any
+# .tf file, so this file is ignored for now.
+#
+
+# You will need to run destroy twice to delete this subnet
+resource "aws_db_subnet_group" "yetanotherchris-subnet" {
+  name       = "zones-a-b"
+  subnet_ids = ["${var.aws_subnet_a_id}", "${var.aws_subnet_b_id}"]
+
+  tags {
+    Name = "yetanotherchris zone A and B"
+  }
+}
+
+resource "aws_rds_cluster" "yetanotherchris-cluster" {
+  cluster_identifier      = "yetanotherchris-cluster"
+  vpc_security_group_ids  = ["${aws_security_group.yetanotherchris-rds.id}"]
+  availability_zones      = ["eu-west-1a"]
+  db_subnet_group_name    = "zones-a-b"
+  backup_retention_period = "7"
+  skip_final_snapshot     = "true"
+
+  # Put these into your tfvars file
+  database_name   = "lonelyisland"
+  master_username = "jacksparrow"
+  master_password = "pirateSoBrave"
+}
+
+resource "aws_rds_cluster_instance" "yetanotherchris-cluster-instances" {
+  identifier           = "yetanotherchris-${count.index}"
+  cluster_identifier   = "${aws_rds_cluster.yetanotherchris-cluster.id}"
+  count                = 1
+  instance_class       = "db.t2.small"
+  db_subnet_group_name = "${aws_db_subnet_group.yetanotherchris-subnet.name}"
+}

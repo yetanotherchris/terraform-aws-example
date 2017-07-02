@@ -1,0 +1,4 @@
+<powershell>
+Enable-WindowsOptionalFeature -online -FeatureName IIS-ASPNET -All
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+</powershell>
