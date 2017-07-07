@@ -3,7 +3,7 @@
 
 # Allow everything (don't do this, it's an example only)
 resource "aws_security_group" "yetanotherchris-allow-all" {
-  name        = "yetanotherchris allow all"
+  name        = "yetanotherchris-allow-all"
   description = "Allow all inbound traffic"
 
   vpc_id = "${var.aws_vpc_id}"
@@ -29,9 +29,9 @@ resource "aws_security_group_rule" "egress-all" {
   security_group_id = "${aws_security_group.yetanotherchris-allow-all.id}"
 }
 
-# Allow port 3306 for RDS
+# RDS: allow port 3306
 resource "aws_security_group" "yetanotherchris-rds" {
-  name        = "yetanotherchris allow port 3306"
+  name        = "yetanotherchris-rds"
   description = "Allow all inbound traffic"
 
   vpc_id = "${var.aws_vpc_id}"
@@ -55,4 +55,22 @@ resource "aws_security_group_rule" "rds-egress" {
   cidr_blocks = ["0.0.0.0/0"]
 
   security_group_id = "${aws_security_group.yetanotherchris-rds.id}"
+}
+
+# Elasticache: port 6379. *This must not belong to the VPC and no egress rules?*
+resource "aws_security_group" "yetanotherchris-elasticache" {
+  name        = "yetanotherchris-elasticache"
+  description = "Allow all inbound traffic"
+    vpc_id   = "${var.aws_vpc_id}"
+
+}
+
+resource "aws_security_group_rule" "elasticache-ingress" {
+  type        = "ingress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "TCP"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = "${aws_security_group.yetanotherchris-elasticache.id}"
 }
