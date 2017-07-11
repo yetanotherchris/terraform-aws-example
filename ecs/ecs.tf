@@ -26,7 +26,7 @@ resource "aws_ecs_service" "letmein" {
   }
 
   load_balancer {
-    elb_name       = "${aws_alb.yetanotherchris-ecs.name}"
+    elb_name       = "${aws_elb.yetanotherchris-ecs.name}"
     container_name = "letmein"
     container_port = 5000
   }
