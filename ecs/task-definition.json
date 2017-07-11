@@ -1,0 +1,57 @@
+[
+    {
+        "volumesFrom": [],
+        "command": [],
+        "environment": [
+            {
+                "Name": "POSTGRES_CONNECTIONSTRING",
+                "Value": "host=postgres;database=letmein;password=letmein123;username=letmein"
+            }
+        ],
+        "essential": true,
+        "entryPoint": [],
+        "links": [
+            "postgres"
+        ],
+        "mountPoints": [],
+        "memory": 512,
+        "name": "letmein",
+        "cpu": 256,
+        "image": "anotherchris/letmein",
+        "portMappings": [
+            {
+                "hostPort": 80,
+                "containerPort": 5000
+            }
+        ]
+    },
+    {
+        "volumesFrom": [],
+        "command": [],
+        "environment": [
+            {
+                
+                "Name": "POSTGRES_USER",
+                "Value": "letmein"
+            },
+            {
+                "Name": "POSTGRES_PASSWORD",
+                "Value": "letmein123"
+            }
+        ],
+        "essential": true,
+        "entryPoint": [],
+        "mountPoints": [],
+        "memory": 512,
+        "name": "postgres",
+        "cpu": 256,
+        "links" : [],
+        "image": "postgres",
+        "portMappings": [
+            {
+                "hostPort": 5432,
+                "containerPort": 5432
+            }
+        ]
+    }
+]
