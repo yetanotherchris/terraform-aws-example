@@ -61,8 +61,7 @@ resource "aws_security_group_rule" "rds-egress" {
 resource "aws_security_group" "yetanotherchris-elasticache" {
   name        = "yetanotherchris-elasticache"
   description = "Allow all inbound traffic"
-    vpc_id   = "${var.aws_vpc_id}"
-
+  vpc_id      = "${var.aws_vpc_id}"
 }
 
 resource "aws_security_group_rule" "elasticache-ingress" {

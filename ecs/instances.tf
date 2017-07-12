@@ -2,9 +2,8 @@
 # Docs: 
 # - https://www.terraform.io/docs/providers/aws/r/instance.html
 # - http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
-
 # Linux ECS optimised
-resource "aws_instance" "yetanotherchris-ecs" {
+/* resource "aws_instance" "yetanotherchris-ecs" {
   ami             = "ami-809f84e6"
   instance_type   = "t2.micro"
   subnet_id       = "${var.aws_subnet_a_id}"
@@ -15,4 +14,5 @@ resource "aws_instance" "yetanotherchris-ecs" {
   tags {
     Name = "yetanotherchris-${count.index}"
   }
-}
+} */
+

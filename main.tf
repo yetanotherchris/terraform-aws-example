@@ -15,8 +15,8 @@ provider "aws" {
 }
 
 //Enable-WindowsOptionalFeature IIS-WebServerRole
-/*module "yetanotherchris" {
-  source = "yetanotherchris/"
+/*module "rolling-deploy" {
+  source = "rolling-deploy/"
 
   # These values come from the tfvars file
   aws_vpc_id      = "${var.aws_vpc_id}"
@@ -28,7 +28,7 @@ module "ecs" {
   source = "ecs/"
 
   # These values come from the tfvars file
-    aws_vpc_id      = "${var.aws_vpc_id}"
+  aws_vpc_id      = "${var.aws_vpc_id}"
   aws_subnet_a_id = "${var.aws_subnet_a_id}"
   aws_subnet_b_id = "${var.aws_subnet_b_id}"
 }
